@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<!-- Язык будет установлен динамически через JS -->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO и мета-теги для соцсетей будут установлены динамически -->
+    <title>MelviDev - Студия Веб и Бот Разработки</title>
+    <meta name="description" content="Студия MelviDev. Создаем быстрые, адаптивные сайты и умных ботов для автоматизации вашего бизнеса. Превращаем идеи в цифровые решения.">
+    <meta name="keywords" content="веб-разработка, разработка ботов, ui/ux дизайн, создание сайтов, telegram бот, melvidev">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:title" content="MelviDev - Студия Веб и Бот Разработки">
+    <meta property="og:description" content="Создаем быстрые, адаптивные сайты и умных ботов для автоматизации вашего бизнеса.">
+    <meta property="og:image" content="https://i.ibb.co/bQdYp2N/logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://your-domain.com/">
+    <meta property="twitter:title" content="MelviDev - Студия Веб и Бот Разработки">
+    <meta property="twitter:description" content="Создаем быстрые, адаптивные сайты и умных ботов для автоматизации вашего бизнеса.">
+    <meta property="twitter:image" content="https://i.ibb.co/bQdYp2N/logo.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Иконки (Lucide Icons) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #F3F4F6;
+        }
+        .text-gradient {
+            background: linear-gradient(90deg, #FFC107, #03A9F4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .lang-btn.active {
+            color: #3B82F6;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- === НАВИГАЦИЯ === -->
+    <header class="bg-gray-900/80 backdrop-blur-sm fixed w-full z-50 top-0">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.ibb.co/bQdYp2N/logo.png" alt="Логотип MelviDev" class="h-10 w-10 rounded-lg" loading="lazy">
+                <span class="text-2xl font-bold text-white">Melvi<span class="text-blue-400">Dev</span></span>
+            </div>
+            
+            <div class="flex items-center space-x-6">
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-blue-400 transition-colors duration-300" data-lang="nav_home">Главная</a>
+                    <a href="#services" class="text-gray-300 hover:text-blue-400 transition-colors duration-300" data-lang="nav_services">Услуги</a>
+                    <a href="#portfolio" class="text-gray-300 hover:text-blue-400 transition-colors duration-300" data-lang="nav_portfolio">Портфолио</a>
+                    <a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors duration-300" data-lang="nav_about">О нас</a>
+                </nav>
+
+                <div class="hidden md:flex items-center space-x-2 text-gray-400">
+                    <button id="lang-ru-desktop" class="lang-btn px-2 py-1 rounded-md hover:text-white transition-colors" aria-label="Переключить на русский">RU</button>
+                    <span>/</span>
+                    <button id="lang-en-desktop" class="lang-btn px-2 py-1 rounded-md hover:text-white transition-colors" aria-label="Switch to English">EN</button>
+                </div>
+
+                <a href="https://www.instagram.com/direct/t/melvidev/" target="_blank" rel="noopener noreferrer" class="hidden md:block bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg transition-transform duration-300 hover:scale-105" data-lang="nav_contact">Связаться</a>
+
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-white focus:outline-none" aria-label="Открыть меню">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#home" class="block py-2 px-6 text-sm text-gray-300 hover:bg-gray-800" data-lang="nav_home_mobile">Главная</a>
+            <a href="#services" class="block py-2 px-6 text-sm text-gray-300 hover:bg-gray-800" data-lang="nav_services_mobile">Услуги</a>
+            <a href="#portfolio" class="block py-2 px-6 text-sm text-gray-300 hover:bg-gray-800" data-lang="nav_portfolio_mobile">Портфолио</a>
+            <a href="#about" class="block py-2 px-6 text-sm text-gray-300 hover:bg-gray-800" data-lang="nav_about_mobile">О нас</a>
+            <a href="https://www.instagram.com/direct/t/melvidev/" target="_blank" rel="noopener noreferrer" class="block py-2 px-6 text-sm text-gray-300 hover:bg-gray-800" data-lang="nav_contact_mobile">Связаться</a>
+            <div class="flex justify-center items-center space-x-2 text-gray-400 py-3">
+                <button id="lang-ru-mobile" class="lang-btn px-2 py-1 rounded-md hover:text-white transition-colors" aria-label="Переключить на русский">RU</button>
+                <span>/</span>
+                <button id="lang-en-mobile" class="lang-btn px-2 py-1 rounded-md hover:text-white transition-colors" aria-label="Switch to English">EN</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="min-h-screen flex items-center bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+            <div class="absolute inset-0 bg-gray-900/80"></div>
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-4" data-lang="hero_title">
+                    Создаем <span class="text-gradient">Цифровые Решения</span>, которые работают
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8" data-lang="hero_subtitle">
+                    MelviDev — ваш надежный партнер в мире веб-разработки и автоматизации. Превращаем идеи в мощные сайты и умных ботов.
+                </p>
+                <a href="https://www.instagram.com/direct/t/melvidev/" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full text-lg transition-transform duration-300 hover:scale-105 inline-block" data-lang="hero_button">
+                    Обсудить проект
+                </a>
+            </div>
+        </section>
+
+        <section id="services" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-white" data-lang="services_title">Наши Услуги</h2>
+                    <p class="text-gray-400 mt-2" data-lang="services_subtitle">Комплексный подход к вашим задачам</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="glass-card rounded-2xl p-8 text-center">
+                        <div class="bg-blue-500/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"><i data-lucide="code-2" class="w-10 h-10 text-blue-400"></i></div>
+                        <h3 class="text-2xl font-semibold text-white mb-3" data-lang="service1_title">Веб-разработка</h3>
+                        <p class="text-gray-400" data-lang="service1_desc">Создаем быстрые, адаптивные и красивые сайты: от лендингов до сложных корпоративных порталов и интернет-магазинов.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-8 text-center">
+                        <div class="bg-yellow-500/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"><i data-lucide="bot" class="w-10 h-10 text-yellow-400"></i></div>
+                        <h3 class="text-2xl font-semibold text-white mb-3" data-lang="service2_title">Разработка Ботов</h3>
+                        <p class="text-gray-400" data-lang="service2_desc">Автоматизируем ваши бизнес-процессы с помощью умных ботов для Telegram, VK и других платформ.</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-8 text-center">
+                        <div class="bg-green-500/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6"><i data-lucide="figma" class="w-10 h-10 text-green-400"></i></div>
+                        <h3 class="text-2xl font-semibold text-white mb-3" data-lang="service3_title">UI/UX Дизайн</h3>
+                        <p class="text-gray-400" data-lang="service3_desc">Проектируем интуитивно понятные и привлекательные интерфейсы, которые нравятся пользователям и решают задачи бизнеса.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-white" data-lang="portfolio_title">Наши Работы</h2>
+                    <p class="text-gray-400 mt-2" data-lang="portfolio_subtitle">Проекты, которыми мы гордимся</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="glass-card rounded-2xl overflow-hidden group">
+                        <img src="https://placehold.co/600x400/1E293B/FFFFFF?text=Проект+1" alt="Проект 1" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-2" data-lang="project1_title">Корпоративный сайт "ТехноПром"</h3>
+                            <p class="text-gray-400 text-sm mb-4" data-lang="project1_desc">Современный сайт для промышленной компании с каталогом продукции.</p>
+                            <span class="bg-blue-500/50 text-blue-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full" data-lang="project1_tag">Веб-сайт</span>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-2xl overflow-hidden group">
+                        <img src="https://placehold.co/600x400/1E293B/FFFFFF?text=Проект+2" alt="Проект 2" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-2" data-lang="project2_title">Telegram-бот для фитнес-клуба</h3>
+                            <p class="text-gray-400 text-sm mb-4" data-lang="project2_desc">Бот для записи на тренировки, просмотра расписания и оплаты.</p>
+                            <span class="bg-yellow-500/50 text-yellow-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full" data-lang="project2_tag">Telegram Бот</span>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-2xl overflow-hidden group">
+                        <img src="https://placehold.co/600x400/1E293B/FFFFFF?text=Проект+3" alt="Проект 3" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-2" data-lang="project3_title">Лендинг для онлайн-курса</h3>
+                            <p class="text-gray-400 text-sm mb-4" data-lang="project3_desc">Продающая страница с высокой конверсией для образовательного проекта.</p>
+                            <span class="bg-green-500/50 text-green-300 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full" data-lang="project3_tag">Лендинг</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Команда MelviDev" class="rounded-2xl shadow-2xl w-full" loading="lazy">
+                    </div>
+                    <div class="md:w-1/2">
+                        <h2 class="text-4xl font-bold text-white mb-4" data-lang="about_title">Кто мы такие?</h2>
+                        <p class="text-gray-400 mb-4" data-lang="about_p1">Мы — команда энтузиастов, увлеченных технологиями и дизайном. Наша миссия — помогать бизнесу расти с помощью качественных и современных цифровых продуктов.</p>
+                        <p class="text-gray-400" data-lang="about_p2">Мы верим в партнерство и прозрачность. На каждом этапе работы вы будете в курсе процесса, а мы — прислушиваться к вашим пожеланиям.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p data-lang="footer_copy">&copy; 2024 MelviDev. Все права защищены.</p>
+            <p class="text-sm mt-2" data-lang="footer_love">Сайт разработан с любовью в студии MelviDev</p>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            ru: {
+                meta_description: "Студия MelviDev. Создаем быстрые, адаптивные сайты и умных ботов для автоматизации вашего бизнеса. Превращаем идеи в цифровые решения.",
+                meta_keywords: "веб-разработка, разработка ботов, ui/ux дизайн, создание сайтов, telegram бот, melvidev",
+                page_title: "MelviDev - Студия Веб и Бот Разработки",
+                nav_home: "Главная",
+                nav_services: "Услуги",
+                nav_portfolio: "Портфолио",
+                nav_about: "О нас",
+                nav_contact: "Связаться",
+                nav_home_mobile: "Главная",
+                nav_services_mobile: "Услуги",
+                nav_portfolio_mobile: "Портфолио",
+                nav_about_mobile: "О нас",
+                nav_contact_mobile: "Связаться",
+                hero_title: "Создаем <span class='text-gradient'>Цифровые Решения</span>, которые работают",
+                hero_subtitle: "MelviDev — ваш надежный партнер в мире веб-разработки и автоматизации. Превращаем идеи в мощные сайты и умных ботов.",
+                hero_button: "Обсудить проект",
+                services_title: "Наши Услуги",
+                services_subtitle: "Комплексный подход к вашим задачам",
+                service1_title: "Веб-разработка",
+                service1_desc: "Создаем быстрые, адаптивные и красивые сайты: от лендингов до сложных корпоративных порталов и интернет-магазинов.",
+                service2_title: "Разработка Ботов",
+                service2_desc: "Автоматизируем ваши бизнес-процессы с помощью умных ботов для Telegram, VK и других платформ.",
+                service3_title: "UI/UX Дизайн",
+                service3_desc: "Проектируем интуитивно понятные и привлекательные интерфейсы, которые нравятся пользователям и решают задачи бизнеса.",
+                portfolio_title: "Наши Работы",
+                portfolio_subtitle: "Проекты, которыми мы гордимся",
+                project1_title: "Корпоративный сайт 'ТехноПром'",
+                project1_desc: "Современный сайт для промышленной компании с каталогом продукции.",
+                project1_tag: "Веб-сайт",
+                project2_title: "Telegram-бот для фитнес-клуба",
+                project2_desc: "Бот для записи на тренировки, просмотра расписания и оплаты.",
+                project2_tag: "Telegram Бот",
+                project3_title: "Лендинг для онлайн-курса",
+                project3_desc: "Продающая страница с высокой конверсией для образовательного проекта.",
+                project3_tag: "Лендинг",
+                about_title: "Кто мы такие?",
+                about_p1: "Мы — команда энтузиастов, увлеченных технологиями и дизайном. Наша миссия — помогать бизнесу расти с помощью качественных и современных цифровых продуктов.",
+                about_p2: "Мы верим в партнерство и прозрачность. На каждом этапе работы вы будете в курсе процесса, а мы — прислушиваться к вашим пожеланиям.",
+                footer_copy: "© 2024 MelviDev. Все права защищены.",
+                footer_love: "Сайт разработан с любовью в студии MelviDev",
+            },
+            en: {
+                meta_description: "MelviDev Studio. We create fast, responsive websites and smart bots to automate your business. Turning ideas into digital solutions.",
+                meta_keywords: "web development, bot development, ui/ux design, website creation, telegram bot, melvidev",
+                page_title: "MelviDev - Web & Bot Development Studio",
+                nav_home: "Home",
+                nav_services: "Services",
+                nav_portfolio: "Portfolio",
+                nav_about: "About Us",
+                nav_contact: "Contact",
+                nav_home_mobile: "Home",
+                nav_services_mobile: "Services",
+                nav_portfolio_mobile: "Portfolio",
+                nav_about_mobile: "About Us",
+                nav_contact_mobile: "Contact",
+                hero_title: "Creating <span class='text-gradient'>Digital Solutions</span> that work",
+                hero_subtitle: "MelviDev is your reliable partner in the world of web development and automation. We turn ideas into powerful websites and smart bots.",
+                hero_button: "Discuss the project",
+                services_title: "Our Services",
+                services_subtitle: "A comprehensive approach to your tasks",
+                service1_title: "Web Development",
+                service1_desc: "We create fast, responsive, and beautiful websites: from landing pages to complex corporate portals and online stores.",
+                service2_title: "Bot Development",
+                service2_desc: "We automate your business processes with smart bots for Telegram, VK, and other platforms.",
+                service3_title: "UI/UX Design",
+                service3_desc: "We design intuitive and attractive interfaces that users love and that solve business problems.",
+                portfolio_title: "Our Works",
+                portfolio_subtitle: "Projects we are proud of",
+                project1_title: "Corporate Website 'TechnoProm'",
+                project1_desc: "A modern website for an industrial company with a product catalog.",
+                project1_tag: "Website",
+                project2_title: "Telegram Bot for a Fitness Club",
+                project2_desc: "A bot for signing up for workouts, viewing schedules, and making payments.",
+                project2_tag: "Telegram Bot",
+                project3_title: "Landing Page for an Online Course",
+                project3_desc: "A high-conversion landing page for an educational project.",
+                project3_tag: "Landing Page",
+                about_title: "Who are we?",
+                about_p1: "We are a team of enthusiasts passionate about technology and design. Our mission is to help businesses grow with high-quality, modern digital products.",
+                about_p2: "We believe in partnership and transparency. At every stage of the work, you will be aware of the process, and we will listen to your wishes.",
+                footer_copy: "© 2024 MelviDev. All rights reserved.",
+                footer_love: "Website developed with love in the MelviDev studio",
+            }
+        };
+
+        const setLanguage = (lang) => {
+            document.documentElement.lang = lang;
+            document.title = translations[lang].page_title;
+            
+            // Обновляем мета-теги для SEO
+            document.querySelector('meta[name="description"]').setAttribute('content', translations[lang].meta_description);
+            document.querySelector('meta[name="keywords"]').setAttribute('content', translations[lang].meta_keywords);
+
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`lang-${lang}-desktop`).classList.add('active');
+            document.getElementById(`lang-${lang}-mobile`).classList.add('active');
+
+            localStorage.setItem('language', lang);
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = menuBtn.querySelector('i');
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const isHidden = mobileMenu.classList.contains('hidden');
+                menuIcon.setAttribute('data-lucide', isHidden ? 'menu' : 'x');
+                menuBtn.setAttribute('aria-label', isHidden ? 'Открыть меню' : 'Закрыть меню');
+                lucide.createIcons();
+            });
+            
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.setAttribute('data-lucide', 'menu');
+                    menuBtn.setAttribute('aria-label', 'Открыть меню');
+                    lucide.createIcons();
+                });
+            });
+
+            const userLang = localStorage.getItem('language') || (navigator.language || navigator.userLanguage).slice(0, 2);
+            const initialLang = translations[userLang] ? userLang : 'en';
+            
+            setLanguage(initialLang);
+
+            document.getElementById('lang-ru-desktop').addEventListener('click', () => setLanguage('ru'));
+            document.getElementById('lang-en-desktop').addEventListener('click', () => setLanguage('en'));
+            document.getElementById('lang-ru-mobile').addEventListener('click', () => setLanguage('ru'));
+            document.getElementById('lang-en-mobile').addEventListener('click', () => setLanguage('en'));
+        });
+    </script>
+</body>
+</html>
